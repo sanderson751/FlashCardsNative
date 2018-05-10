@@ -58,15 +58,42 @@ const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
   },
-  // EntryDetail: {
-  //   screen: EntryDetail,
-  //   navigationOptions: {
-  //     headerTintColor: white,
-  //     headerStyle: {
-  //       backgroundColor: purple,
-  //     }
-  //   }
-  // }
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  NewQuestion: {
+    screen: NewQuestion,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  NewDeck: {
+    screen: NewDeck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  }
 })
 
 export default class App extends React.Component {

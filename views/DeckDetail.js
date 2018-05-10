@@ -9,6 +9,20 @@ class DeckDetail extends PureComponent {
         onPressItem: PropTypes.func
     }
 
+    handleAddCard = () => {
+        this.props.navigation.navigate(
+            'NewDeck',
+            { deckId: 'deckId' }
+        )
+    }
+
+    handleStartQuiz = () => {
+        this.props.navigation.navigate(
+            'Quiz',
+            { quizId: 'quizId' }
+        )
+    } 
+
     render() {
         return (
                 <Paper style={styles.paper}>
@@ -17,10 +31,10 @@ class DeckDetail extends PureComponent {
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, marginBottom: 20}}>3 cards</Text>
                     </View>
                     <View style={styles.paperViews}>
-                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} raised primary onPress={() => alert('Pressed Add Card')}>
+                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} raised primary onPress={this.handleAddCard}>
                             Add Card
                         </Button>
-                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} color='black' raised onPress={() => alert('Pressed Start Quiz')}>
+                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} color='black' raised onPress={this.handleStartQuiz}>
                             Start Quiz
                         </Button>
                     </View>

@@ -13,6 +13,12 @@ class Quiz extends PureComponent {
         question: true
     }
 
+    handleChangeQuestionToAnswer = () => {
+        this.setState((state) => {
+            return {question: !state.question}
+        });
+    }
+
     render() {
         const { question } = this.state;
         return (
@@ -25,12 +31,16 @@ class Quiz extends PureComponent {
                         ? 
                             <View style={styles.paperViews}>
                                 <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 40, marginBottom: 20}}>Question?</Text>
-                                <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, marginBottom: 20, color: 'red'}}>Answer</Text>
+                                <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} color='red' flat onPress={this.handleChangeQuestionToAnswer}>
+                                    Answer
+                                </Button>
                             </View>
                         :
                             <View style={styles.paperViews}>
                                 <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 40, marginBottom: 20}}>Answer...</Text>
-                                <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, marginBottom: 20, color: 'red'}}>Question</Text>
+                                <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} color='red' flat onPress={this.handleChangeQuestionToAnswer}>
+                                    Question
+                                </Button>
                             </View>
                         }
                         <View style={styles.paperViews}>

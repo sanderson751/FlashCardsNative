@@ -5,7 +5,10 @@ import DeckList from '../components/DeckList'
 class Decks extends PureComponent {
     
     onPress = (item) => {
-        alert(item.key);
+        this.props.navigation.navigate(
+            'DeckDetail',
+            { item }
+        )
     }
 
     render() {

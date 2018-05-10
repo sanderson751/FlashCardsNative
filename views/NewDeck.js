@@ -13,9 +13,11 @@ class NewDeck extends PureComponent {
         text: ''
     };
 
-    onPress = (item) => {
-        const { onPressItem } = this.props;
-        onPressItem && onPressItem.call(this, item);
+    handleSubmit = () => {
+        this.props.navigation.navigate(
+            'NewQuestion',
+            { deckId: 'deckId' }
+        )     
     }
 
     render() {
@@ -27,7 +29,7 @@ class NewDeck extends PureComponent {
                     value={this.state.text}
                     onChangeText={text => this.setState({ text })}
                 />
-                <Button style={{alignSelf: 'center', marginTop: 20}} raised primary onPress={() => alert('Pressed')}>
+                <Button style={{alignSelf: 'center', marginTop: 20}} raised primary onPress={this.handleSubmit}>
                     Submit
                 </Button>
             </Paper>
