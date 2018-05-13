@@ -1,8 +1,15 @@
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
-import DeckList from '../components/DeckList'
+import DeckList from '../components/DeckList';
+import { connect } from 'react-redux';
+import { fetchDecksAPI } from '../actions'
 
 class Decks extends PureComponent {
+
+    componentDidMount () {
+        const {requestDecks}  = this.props;
+        requestDecks && requestDecks();
+      }
     
     onPress = (item) => {
         this.props.navigation.navigate(
@@ -12,12 +19,28 @@ class Decks extends PureComponent {
     }
 
     render() {
+        const {decks} = this.props;
         return (
             <View style={{flex: 1}}>
-                <DeckList onPressItem={this.onPress} />
+                <DeckList items={decks} onPressItem={this.onPress} />
             </View> 
         );
     }
 }
 
-export default Decks;
+function mapStateToProps (decks) {
+    return {
+        decks
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+      requestDecks: () => dispatch(fetchDecksAPI())
+    }
+  }
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Decks);

@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, Platform, StatusBar, View, Text, FlatList } from 'react-native';
-import { TabNavigator, StackNavigator } from 'react-navigation'
-import { Constants } from 'expo'
-import { Button } from 'react-native-paper'
+import { TabNavigator, StackNavigator } from 'react-navigation';
+import { Constants } from 'expo';
+import { Button } from 'react-native-paper';
 import { purple, white } from './utils/colors';
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import reducer from './reducers';
 import DecksView from './views/Decks';
 import NewDeck from './views/NewDeck';
 import NewQuestion from './views/NewQuestion';
@@ -100,13 +104,15 @@ export default class App extends React.Component {
   
   render() {
     return (
-      //<Provider store={createStore(reducer)}>
-      <View style={{flex: 1}}>
-        <FlashCardsStatusBar backgroundColor={purple} barStyle="light-content" />
-        
-        <MainNavigator />
-      </View>
-      //</Provider>
+      <Provider store={createStore(reducer, compose(
+          applyMiddleware(thunk)
+        ))}>
+        <View style={{flex: 1}}>
+          <FlashCardsStatusBar backgroundColor={purple} barStyle="light-content" />
+          
+          <MainNavigator />
+        </View>
+      </Provider>
     );
   }
 }

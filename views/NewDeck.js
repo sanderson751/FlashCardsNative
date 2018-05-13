@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from  'prop-types';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { Button, TextInput, Text, Paper } from 'react-native-paper';
+import { saveDeckTitle } from '../utils/api'
 
 class NewDeck extends PureComponent {
     
@@ -14,6 +15,7 @@ class NewDeck extends PureComponent {
     };
 
     handleSubmit = () => {
+        console.log(saveDeckTitle({title: this.state.text}).then(result => {return result}));
         this.props.navigation.navigate(
             'NewQuestion',
             { deckId: 'deckId' }
