@@ -13,9 +13,17 @@ export function saveDeckTitle ({title}) {
         questions: [],
       }
     }));
-    // .then(formatCalendarResults)
 }
 
+export function addCardToDeck ({title, question, answer}) {
+  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
+      [title]: {
+        title,
+        questions: [question, answer],
+      }
+    }));
+    // .then(formatDeckResults)
+}
 
 // export function submitEntry ({ entry, key }) {
 //   return AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, JSON.stringify({

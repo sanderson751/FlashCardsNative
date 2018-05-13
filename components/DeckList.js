@@ -21,7 +21,7 @@ class DeckList extends PureComponent {
                 <TouchableOpacity onPress={this.onPress.bind(this,item)}>
                     <View style={{borderBottomWidth: 0.5, paddingTop: 25, paddingBottom: 25, alignContent:'center', alignItems: 'center'}}>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, padding: 4}}>{item.title}</Text>
-                        <Text numberOfLines={1} ellipsizeMode='tail' style={{color: 'gray'}}>quantidade do deck</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={{color: 'gray'}}>{item.questions.length} cards</Text>
                     </View>
                 </TouchableOpacity>
             )
@@ -30,8 +30,6 @@ class DeckList extends PureComponent {
 
     render() {
         const {items} = this.props;
-        console.log('items no render');
-        console.log(items);
         return (
             <FlatList
                 data={Object.values(items)}

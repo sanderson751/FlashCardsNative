@@ -36,9 +36,9 @@ function mapStateToProps (decks) {
 
 function mapDispatchToProps (dispatch) {
     return {
-      requestDecks: () => dispatch(fetchDecksAPI())
+        requestDecks: () => dispatch(fetchDecksAPI())
     }
-  }
+}
 
 export default connect(
     mapStateToProps,

@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from  'prop-types';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { Button, TextInput, Text, Paper } from 'react-native-paper';
-import { saveDeckTitle } from '../utils/api'
+import { addDeckToStorage } from '../actions'
+import { connect } from 'react-redux';
 
 class NewDeck extends PureComponent {
     
@@ -15,11 +16,16 @@ class NewDeck extends PureComponent {
     };
 
     handleSubmit = () => {
-        console.log(saveDeckTitle({title: this.state.text}).then(result => {return result}));
-        this.props.navigation.navigate(
-            'NewQuestion',
-            { deckId: 'deckId' }
-        )     
+        const {text} = this.state;
+        this.props.addDeck({title: text}).then((result) => {
+            this.props.navigation.navigate(
+                'NewQuestion',
+                { deckId: text }
+            );     
+            this.setState({
+                text: ''
+            })
+        });
     }
 
     render() {
@@ -46,6 +52,21 @@ const styles = StyleSheet.create({
         margin: 20,
         justifyContent: 'center',
      },
-  });
+});
 
-export default NewDeck;
+function mapStateToProps (deck) {
+    return {
+        deck
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        addDeck: (param) => dispatch(addDeckToStorage(param))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NewDeck);

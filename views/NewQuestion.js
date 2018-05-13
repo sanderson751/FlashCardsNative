@@ -2,38 +2,38 @@ import React, { PureComponent } from 'react';
 import PropTypes from  'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { Button, TextInput, Paper } from 'react-native-paper';
+import { addCardToDeckStorage } from '../actions';
+import { connect } from 'react-redux';
 
 class NewQuestion extends PureComponent {
     
-    static propTypes = {
-        onPressItem: PropTypes.func
-    }
-
     state = {
-        questionValue: '',
-        answerValue: ''
+        question: '',
+        answer: ''
     };
 
-    onPress = (item) => {
-        const { onPressItem } = this.props;
-        onPressItem && onPressItem.call(this, item);
+    handleOnPress = (deckId) => {
+        const {question, answer} = this.state;
+        this.props.addCard({title: deckId, question, answer});
     }
 
     render() {
-        const { questionValue, answerValue } = this.state;
+        const {navigation} = this.props;
+        const {deckId} = navigation.state.params;
+        const { question, answer } = this.state;
         return (
                 <Paper style={styles.paper}>
                     <TextInput
                         label='Question'
-                        value={questionValue}
-                        onChangeText={questionValue => this.setState({ questionValue })}
+                        value={question}
+                        onChangeText={question => this.setState({ question })}
                     />
                     <TextInput
                         label='Answer'
-                        value={answerValue}
-                        onChangeText={answerValue => this.setState({ answerValue })}
+                        value={answer}
+                        onChangeText={answer => this.setState({ answer })}
                     />
-                    <Button style={{alignSelf: 'center', marginTop: 20}} raised primary onPress={() => alert('Pressed')}>
+                    <Button style={{alignSelf: 'center', marginTop: 20}} raised primary onPress={this.handleOnPress.bind(this, deckId)}>
                         Submit
                     </Button>
                 </Paper>
@@ -48,6 +48,21 @@ const styles = StyleSheet.create({
         margin: 20,
         justifyContent: 'center',
      },
-  });
+});
 
-export default NewQuestion;
+function mapStateToProps (decks) {
+    return {
+        decks
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        addCard: (param) => dispatch(addCardToDeckStorage(param))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NewQuestion);

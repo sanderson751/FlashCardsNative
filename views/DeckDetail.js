@@ -9,10 +9,10 @@ class DeckDetail extends PureComponent {
         onPressItem: PropTypes.func
     }
 
-    handleAddCard = () => {
+    handleAddCard = (item) => {
         this.props.navigation.navigate(
-            'NewDeck',
-            { deckId: 'deckId' }
+            'NewQuestion',
+            { deckId: item }
         )
     }
 
@@ -24,14 +24,16 @@ class DeckDetail extends PureComponent {
     } 
 
     render() {
+        const {navigation} = this.props;
+        const {item} = navigation.state.params;
         return (
                 <Paper style={styles.paper}>
                     <View style={styles.paperViews}>
-                        <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 40, marginBottom: 20}}>Titulo do deck</Text>
-                        <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, marginBottom: 20}}>3 cards</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 40, marginBottom: 20}}>{item.title}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, marginBottom: 20}}>{item.questions.length} cards</Text>
                     </View>
                     <View style={styles.paperViews}>
-                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} raised primary onPress={this.handleAddCard}>
+                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} raised primary onPress={this.handleAddCard.bind(this, item)}>
                             Add Card
                         </Button>
                         <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} color='black' raised onPress={this.handleStartQuiz}>
