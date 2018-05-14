@@ -14,7 +14,7 @@ class NewQuestion extends PureComponent {
 
     handleOnPress = (deckId) => {
         const {question, answer} = this.state;
-        this.props.addCard({title: deckId, question, answer});
+        this.props.addCard({title: deckId, questions: [{question, answer}]});
     }
 
     render() {

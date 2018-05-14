@@ -12,7 +12,7 @@ class DeckDetail extends PureComponent {
     handleAddCard = (item) => {
         this.props.navigation.navigate(
             'NewQuestion',
-            { deckId: item }
+            { deckId: item.title }
         )
     }
 
