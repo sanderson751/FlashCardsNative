@@ -7,44 +7,39 @@ import { fetchDeckAPI } from '../actions'
 
 class DeckDetail extends PureComponent {
     
-    static propTypes = {
-        onPressItem: PropTypes.func
-    }
-
     componentDidMount () {
         const {navigation, getDeck} = this.props;
         const {deckId} = navigation.state.params;
         getDeck(deckId);
     }
 
-    handleAddCard = (item) => {
+    handleAddCard = (deck) => {
         this.props.navigation.navigate(
             'NewQuestion',
-            { deckId: item.title }
+            { deckId: deck.title }
         )
     }
 
-    handleStartQuiz = (item) => {
+    handleStartQuiz = (deck) => {
         this.props.navigation.navigate(
             'Quiz',
-            { deckId: item.title }
+            { deckId: deck.title }
         )
     } 
 
     render() {
-        const {deck: item} = this.props;
-        console.log(item);
+        const {deck} = this.props;
         return (
                 <Paper style={styles.paper}>
                     <View style={styles.paperViews}>
-                        <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 40, marginBottom: 20}}>{item.title}</Text>
-                        <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, marginBottom: 20}}>{item.questions && item.questions.length} cards</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 40, marginBottom: 20}}>{deck.title}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, marginBottom: 20}}>{deck.questions && deck.questions.length} cards</Text>
                     </View>
                     <View style={styles.paperViews}>
-                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} raised primary onPress={this.handleAddCard.bind(this, item)}>
+                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} raised primary onPress={this.handleAddCard.bind(this, deck)}>
                             Add Card
                         </Button>
-                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} color='black' raised onPress={this.handleStartQuiz.bind(this, item)}>
+                        <Button style={{alignSelf: 'center', marginTop: 20, width: 150}} color='black' raised onPress={this.handleStartQuiz.bind(this, deck)}>
                             Start Quiz
                         </Button>
                     </View>

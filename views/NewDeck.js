@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 
 class NewDeck extends PureComponent {
     
-    static propTypes = {
-        onPressItem: PropTypes.func
-    }
-
     state = {
         text: ''
     };

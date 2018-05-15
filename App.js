@@ -14,7 +14,8 @@ import NewDeck from './views/NewDeck';
 import NewQuestion from './views/NewQuestion';
 import DeckDetail from './views/DeckDetail';
 import Quiz from './views/Quiz';
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native';
+import { setLocalNotification } from './utils/helpers';
 
 function FlashCardsStatusBar ({backgroundColor, ...props}) {
   return (
@@ -103,6 +104,10 @@ const MainNavigator = StackNavigator({
 
 export default class App extends React.Component {
 
+  componentDidMount () {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer, compose(
@@ -110,7 +115,6 @@ export default class App extends React.Component {
         ))}>
         <View style={{flex: 1}}>
           <FlashCardsStatusBar backgroundColor={purple} barStyle="light-content" />
-          
           <MainNavigator />
         </View>
       </Provider>

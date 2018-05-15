@@ -18,7 +18,7 @@ class DeckList extends PureComponent {
     renderItems = ({item}) => {
         if (item.title) {
             return (
-                <TouchableOpacity onPress={this.onPress.bind(this,item)}>
+                <TouchableOpacity onPress={this.onPress.bind(this, item)}>
                     <View style={{borderBottomWidth: 0.5, paddingTop: 25, paddingBottom: 25, alignContent:'center', alignItems: 'center'}}>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, padding: 4}}>{item.title}</Text>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{color: 'gray'}}>{item.questions.length} cards</Text>

@@ -3,7 +3,8 @@ import PropTypes from  'prop-types';
 import { View, FlatList, StyleSheet, AlertIOS } from 'react-native';
 import { Button, TextInput, Text, Paper, Modal } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { fetchDeckAPI } from '../actions'
+import { fetchDeckAPI } from '../actions';
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
 
 class Quiz extends PureComponent {
     
@@ -46,7 +47,10 @@ class Quiz extends PureComponent {
                   },
                   {
                     text: 'Back to Deck',
-                    onPress: () => {navigation.goBack()},
+                    onPress: () => {
+                        clearLocalNotification().then(setLocalNotification);
+                        navigation.goBack();
+                    },
                   },
                 ]
               );
@@ -79,7 +83,10 @@ class Quiz extends PureComponent {
                   },
                   {
                     text: 'Back to Deck',
-                    onPress: () => {navigation.goBack()},
+                    onPress: () => {
+                        clearLocalNotification().then(setLocalNotification);
+                        navigation.goBack();
+                    },
                   },
                 ]
               );

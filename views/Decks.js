@@ -12,7 +12,6 @@ class Decks extends PureComponent {
       }
     
     onPress = (item) => {
-        console.log(item);
         this.props.navigation.navigate(
             'DeckDetail',
             { deckId: item.title }
