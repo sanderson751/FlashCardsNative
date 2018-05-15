@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from  'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { Button, TextInput, Paper } from 'react-native-paper';
-import { addCardToDeckStorage } from '../actions';
+import { addCardToDeckStorage, fetchDeckAPI } from '../actions';
 import { connect } from 'react-redux';
 
 class NewQuestion extends PureComponent {
@@ -12,14 +12,20 @@ class NewQuestion extends PureComponent {
         answer: ''
     };
 
-    handleOnPress = (deckId) => {
+    componentDidMount () {
+        const {navigation, getDeck} = this.props;
+        const {deckId} = navigation.state.params;
+        getDeck(deckId);
+    }
+
+    handleOnPress = (deck) => {
         const {question, answer} = this.state;
-        this.props.addCard({title: deckId, questions: [{question, answer}]});
+        this.props.addCard({title: deck.title, questions: [{question, answer}]}, deck);
     }
 
     render() {
-        const {navigation} = this.props;
-        const {deckId} = navigation.state.params;
+        const {deck} = this.props;
+        //const {deckId} = navigation.state.params;
         const { question, answer } = this.state;
         return (
                 <Paper style={styles.paper}>
@@ -33,7 +39,7 @@ class NewQuestion extends PureComponent {
                         value={answer}
                         onChangeText={answer => this.setState({ answer })}
                     />
-                    <Button style={{alignSelf: 'center', marginTop: 20}} raised primary onPress={this.handleOnPress.bind(this, deckId)}>
+                    <Button style={{alignSelf: 'center', marginTop: 20}} raised primary onPress={this.handleOnPress.bind(this, deck)}>
                         Submit
                     </Button>
                 </Paper>
@@ -50,15 +56,16 @@ const styles = StyleSheet.create({
      },
 });
 
-function mapStateToProps (decks) {
+function mapStateToProps (deck) {
     return {
-        decks
+        deck
     }
 }
 
 function mapDispatchToProps (dispatch) {
     return {
-        addCard: (param) => dispatch(addCardToDeckStorage(param))
+        getDeck: (deckId) => dispatch(fetchDeckAPI(deckId)),
+        addCard: (param, deck) => dispatch(addCardToDeckStorage(param, deck))
     }
 }
 

@@ -14,6 +14,7 @@ import NewDeck from './views/NewDeck';
 import NewQuestion from './views/NewQuestion';
 import DeckDetail from './views/DeckDetail';
 import Quiz from './views/Quiz';
+import { AsyncStorage } from 'react-native'
 
 function FlashCardsStatusBar ({backgroundColor, ...props}) {
   return (
@@ -101,6 +102,10 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+
+  componentDidMount () {
+    //AsyncStorage.clear();
+  }
   
   render() {
     return (

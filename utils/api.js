@@ -7,7 +7,7 @@ export function getDecksAPI () {
 }
 
 export function saveDeckTitle ({title}) {
-  return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify({
+  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
       [title]: {
         title,
         questions: [],
@@ -15,15 +15,29 @@ export function saveDeckTitle ({title}) {
     }));
 }
 
-export function addCardToDeck ({title, questions}) {
-  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
-      [title]: {
-        title,
-        questions,
-      }
-    }));
+export function addCardToDeck ({title, questions}, deck) {
+    
+    if (deck.questions) {
+      questions = questions.concat(deck.questions);
+    }
+    return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
+        [title]: {
+          title,
+          questions,
+        }
+    })); 
+    
+    //
     // .then(formatDeckResults)
 }
+
+export function getDeckAPI (title) {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then((results) => {
+      return JSON.parse(results)[title];
+    })
+}
+
 
 // export function submitEntry ({ entry, key }) {
 //   return AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, JSON.stringify({

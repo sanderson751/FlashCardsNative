@@ -17,7 +17,6 @@ class DeckList extends PureComponent {
 
     renderItems = ({item}) => {
         if (item.title) {
-            console.log(item);
             return (
                 <TouchableOpacity onPress={this.onPress.bind(this,item)}>
                     <View style={{borderBottomWidth: 0.5, paddingTop: 25, paddingBottom: 25, alignContent:'center', alignItems: 'center'}}>
