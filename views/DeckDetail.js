@@ -13,8 +13,8 @@ class DeckDetail extends PureComponent {
 
     componentDidMount () {
         const {navigation, getDeck} = this.props;
-        const {item} = navigation.state.params;
-        getDeck(item.title);
+        const {deckId} = navigation.state.params;
+        getDeck(deckId);
     }
 
     handleAddCard = (item) => {

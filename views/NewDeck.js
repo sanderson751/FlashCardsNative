@@ -19,7 +19,7 @@ class NewDeck extends PureComponent {
         const {text} = this.state;
         this.props.addDeck({title: text}).then((result) => {
             this.props.navigation.navigate(
-                'NewQuestion',
+                'DeckDetail',
                 { deckId: text }
             );     
             this.setState({

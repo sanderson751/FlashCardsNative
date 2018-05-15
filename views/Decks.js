@@ -15,7 +15,7 @@ class Decks extends PureComponent {
         console.log(item);
         this.props.navigation.navigate(
             'DeckDetail',
-            { item }
+            { deckId: item.title }
         )
     }
 

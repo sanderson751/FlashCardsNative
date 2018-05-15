@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Platform, StatusBar, View, Text, FlatList } from 'react-native';
+import { StyleSheet, Platform, StatusBar, View, Text, FlatList, Animated } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Constants } from 'expo';
 import { Button } from 'react-native-paper';
 import { purple, white } from './utils/colors';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -29,14 +29,14 @@ const Tabs = TabNavigator({
     screen: DecksView,
     navigationOptions: {
       tabBarLabel: 'Decks',
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+      tabBarIcon: () => <FontAwesome name='book' size={30} />
     },
   },
   NewDeck: {
     screen: NewDeck,
     navigationOptions: {
       tabBarLabel: 'New Deck',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+      tabBarIcon: () => <FontAwesome name='plus-square' size={30}/>
     },
   }
 }, {
@@ -103,10 +103,6 @@ const MainNavigator = StackNavigator({
 
 export default class App extends React.Component {
 
-  componentDidMount () {
-    //AsyncStorage.clear();
-  }
-  
   render() {
     return (
       <Provider store={createStore(reducer, compose(
