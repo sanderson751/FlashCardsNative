@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
-# Start Developing
+## Start Developing
 
 To get started developing right away:
 
@@ -15,7 +15,7 @@ To get started developing right away:
     - `redux-thunk`
     - `redux`
 
-# Device
+## Device
 
 * Aparelho que foi efetuado os testes
     - `Iphone 6s`
