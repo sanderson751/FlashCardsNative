@@ -1,16 +1,21 @@
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
-Start Developing
+# Start Developing
+
 To get started developing right away:
-yarn install
-yarn start
 
-FlashCardsNative
-Bibliotecas adicionais ao projeto:
+* Install and start the app
+    - `yarn install`
+    - `yarn start`
 
-react-native-paper
-redux-thunk
-redux
+## Bibliotecas adicionais ao projeto:
 
-Aparelho que foi efetuado os testes
- - Iphone 6s
+* FlashCardsNative
+    - `react-native-paper`
+    - `redux-thunk`
+    - `redux`
+
+# Device
+
+* Aparelho que foi efetuado os testes
+    - `Iphone 6s`
