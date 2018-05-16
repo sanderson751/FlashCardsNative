@@ -1,13 +1,24 @@
 import React, { PureComponent } from 'react';
 import PropTypes from  'prop-types';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, Animated } from 'react-native';
 import { Button, TextInput, Text, Paper } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { fetchDeckAPI } from '../actions'
 
 class DeckDetail extends PureComponent {
     
+    state = {
+        fadeAnim: new Animated.Value(0),
+    }
+
     componentDidMount () {
+        Animated.timing(
+        this.state.fadeAnim,
+        {
+            toValue: 1,
+            duration: 2000,
+        }
+        ).start();
         const {navigation, getDeck} = this.props;
         const {deckId} = navigation.state.params;
         getDeck(deckId);
@@ -29,8 +40,15 @@ class DeckDetail extends PureComponent {
 
     render() {
         const {deck} = this.props;
+        let { fadeAnim } = this.state;
         return (
-                <Paper style={styles.paper}>
+                <Animated.View style={{
+                    flex: 1,
+                    padding: 20,
+                    margin: 20,
+                    justifyContent: 'space-around',
+                    opacity: fadeAnim,
+                  }}>
                     <View style={styles.paperViews}>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 40, marginBottom: 20}}>{deck.title}</Text>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{fontSize: 20, marginBottom: 20}}>{deck.questions && deck.questions.length} cards</Text>
@@ -43,23 +61,15 @@ class DeckDetail extends PureComponent {
                             Start Quiz
                         </Button>
                     </View>
-                </Paper>
-        
+                </Animated.View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    paper: {
-        flex: 1,
-        padding: 20,
-        margin: 20,
-        justifyContent: 'space-around',
-     },
-     paperViews: {
-        alignItems: 'center'
-     }
-
+    paperViews: {
+       alignItems: 'center'
+    }
 });
 
 function mapStateToProps (deck) {
