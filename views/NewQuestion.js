@@ -27,7 +27,6 @@ class NewQuestion extends PureComponent {
 
     render() {
         const {deck} = this.props;
-        //const {deckId} = navigation.state.params;
         const { question, answer } = this.state;
         return (
                 <Paper style={styles.paper}>
